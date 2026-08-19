@@ -1,0 +1,713 @@
+/* ─── General ────────────────────────────────────────────────────────────── */
+
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+/* View transition — plays whenever showView() switches to a new view (Search,
+   Detail, or Favorites). The class is removed and re-added in JavaScript so
+   the keyframes restart on every navigation, including Back to Results. */
+.view-fade-in {
+  animation: viewFadeIn 0.3s ease;
+}
+
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────────────────── */
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar a:hover {
+  opacity: 0.85;
+}
+
+.nav-tab {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.nav-tab.active {
+  color: #ffffff;
+}
+
+.nav-tab:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.nav-tab.active:hover {
+  color: #ffffff;
+}
+
+/* Stacked links inside the collapsed hamburger menu get a thin divider so
+   they're easier to tap-target on mobile. */
+.navbar-collapse .navbar-nav .nav-tab {
+  width: 100%;
+}
+
+/* Favorites count badge — square with rounded corners, next to "Favorites" */
+.favorites-badge {
+  display: inline-block;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 7px;
+  border-radius: 6px;
+  background-color: #0d6efd;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+}
+
+/* ─── Search Bar ─────────────────────────────────────────────────────────── */
+
+.search-bar-wrapper {
+  border: 1px solid #e9ecef;
+}
+
+#search-input,
+#source-filter {
+  height: 64px;
+  font-size: 1.25rem;
+}
+
+#search-btn {
+  height: 64px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+#search-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-check-label {
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.form-check-input {
+  width: 1.4em;
+  height: 1.4em;
+  cursor: pointer;
+}
+
+/* ─── Results Count ──────────────────────────────────────────────────────── */
+
+.results-count {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-img-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;     /* landscape — image is wider than tall */
+  overflow: hidden;
+  background-color: #e9ecef;
+}
+
+.card-img-wrapper .card-img-top {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.no-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9ecef;
+  color: #6c757d;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-text {
+  font-size: 0.8rem;
+}
+
+/* ─── Source Badge ───────────────────────────────────────────────────────── */
+
+.source-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.badge-met {
+  background-color: #dc3545;
+  color: white;
+}
+
+.badge-harvard {
+  background-color: #198754;
+  color: white;
+}
+
+/* ─── Skeleton Loading ───────────────────────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Skeleton placeholder card — sized to match a real result card so the
+   layout doesn't jump when results arrive. */
+.skeleton-card {
+  cursor: default;
+}
+
+.skeleton-card:hover {
+  transform: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;      /* matches .card-img-wrapper proportions */
+  border-radius: 0;
+}
+
+.skeleton-line {
+  border-radius: 4px;
+}
+
+.skeleton-line--title {
+  height: 0.95rem;          /* matches .card-title font size, line 1 */
+  width: 100%;
+}
+
+.skeleton-line--title-2 {
+  height: 0.95rem;          /* line 2 of the (potentially wrapping) title */
+  width: 70%;
+}
+
+.skeleton-line--artist {
+  height: 0.85rem;          /* matches .card-text artist line */
+  width: 80%;
+}
+
+.skeleton-line--date {
+  height: 0.75rem;          /* matches the small muted date */
+  width: 40%;
+}
+
+/* ─── Pagination ─────────────────────────────────────────────────────────── */
+
+.pagination-group {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.pagination-group.d-flex {
+  display: flex !important;
+}
+
+.page-btn {
+  background-color: #ffffff;
+  color: #4f46e5;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  outline: none;
+}
+
+.page-btn:hover:not(:disabled):not(.page-btn-indicator) {
+  background-color: #f3f4f6;
+  color: #4338ca;
+}
+
+.page-btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.page-btn:disabled,
+.page-btn.disabled {
+  color: #4f46e5;
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+}
+
+.page-btn-prev {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-right: none;
+}
+
+.page-btn-indicator {
+  border-left: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+  cursor: default;
+  background-color: #f3f4f6;
+  color: #4f46e5;
+  opacity: 1;
+}
+
+.page-btn-indicator:disabled {
+  color: #4f46e5;
+  background-color: #f3f4f6;
+  opacity: 1;
+}
+
+.page-btn-next {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-left: none;
+}
+
+/* ─── Detail View ────────────────────────────────────────────────────────── */
+
+/* The Related Works thumbnails use the browser's native tooltip (rendered
+   from the `title` attribute) — that gives us the macOS-style light-gray
+   tooltip that appears next to the cursor. No CSS override needed. */
+
+
+/* Back to Results — outline button, gray border + text, fills on hover */
+.btn-back {
+  background-color: transparent;
+  color: #6c757d;
+  border: 1px solid #6c757d;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-back:hover,
+.btn-back:focus {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+/* Title and artist on the right column — scales down on phones, full size on
+   tablet+. */
+.detail-title {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #212529;
+  line-height: 1.2;
+}
+
+.detail-artist {
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  margin-bottom: 0;
+}
+
+/* White card that wraps the image — gives the artwork a soft framed look on
+   every viewport (matches the reference iPhone 12 Pro screenshots). */
+.detail-image-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+/* When there's no image, drop the white frame so only the title placeholder
+   sits on the page background. */
+.detail-image-card:has(.detail-image-wrapper--no-image) {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.detail-image-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#detail-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+  background-color: #000;
+  border-radius: 4px;
+}
+
+.detail-image-wrapper--no-image {
+  background-color: transparent;
+  min-height: auto;
+  border-radius: 0;
+  justify-content: flex-start;
+}
+
+.detail-title-placeholder {
+  display: inline-block;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #212529;
+  font-size: 1.25rem;
+  font-weight: 400;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Add/Remove from Favorites button */
+.fav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: transparent;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Hover on the unfavorited button fills the bright red — and the favorited
+   "Remove from Favorites" state uses the exact same color. We deliberately
+   do NOT include :focus here, otherwise the button would stay red after
+   being clicked (focus persists on the button until you click elsewhere). */
+.fav-btn:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+}
+
+.fav-btn:hover .fav-btn-icon {
+  color: #ffffff;
+}
+
+.fav-btn--active,
+.fav-btn--active:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+}
+
+.fav-btn--active .fav-btn-icon {
+  color: #ffffff;
+}
+
+/* Suppress Bootstrap's default focus ring/box-shadow so a clicked button
+   doesn't keep showing a stuck "active" appearance. Keyboard users still
+   get a visible focus indicator via :focus-visible. */
+.fav-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.fav-btn:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.35);
+}
+
+.fav-btn-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* When the heart is hidden (favorited state), drop it from layout entirely
+   so the "Remove from Favorites" text sits centered without a leading gap. */
+.fav-btn-icon--hidden {
+  display: none;
+}
+
+/* Detail-view tab strip — borderless tabs with underline on active */
+.detail-tabs {
+  border-bottom: 1px solid #e5e7eb;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.detail-tabs .nav-link {
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  padding: 0.7rem 0.6rem;
+  margin-bottom: -1px;
+  color: #6c757d;
+  /* Scales between viewports — small enough on mobile for 3 tabs in row 1 */
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  font-weight: 500;
+  background-color: transparent;
+  white-space: nowrap;
+}
+
+.detail-tabs .nav-link:hover {
+  color: #4f46e5;
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.detail-tabs .nav-link.active {
+  color: #4f46e5;
+  border-bottom-color: #4f46e5;
+  background-color: transparent;
+  font-weight: 600;
+}
+
+/* Tab content panel — tighter padding on phones */
+.detail-tab-content {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: 0 0 6px 6px;
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+/* Overview key/value list — uses Bootstrap rows/cols for the responsive
+   layout (col-12 stacks on mobile, col-md-3/-9 lays out as two columns on
+   tablet+). No media queries here — Bootstrap handles the breakpoints. */
+.overview-grid {
+  font-size: 1.05rem;
+}
+
+.overview-label {
+  font-weight: 700;
+  color: #212529;
+}
+
+.overview-value {
+  color: #212529;
+}
+
+#detail-museum-link {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  padding: 0.4rem 0.9rem;
+}
+
+/* Biography tab */
+.bio-thumbnail {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+.bio-extract {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #212529;
+  margin-bottom: 0;
+}
+
+/* Related Works thumbnails — image-only, rounded corners with soft shadow.
+   Title shows in the browser's native tooltip (via the `title` attr) after
+   a short hover delay. */
+.related-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.related-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.related-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.related-thumb--broken {
+  background-color: #e9ecef;
+}
+
+/* Map header — sized so the museum name and address each stay on one line
+   even on a 390px viewport. Scales up on tablet+. */
+.map-museum-name {
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-museum-address {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Map */
+#map {
+  height: 360px;
+  width: 100%;
+  border-radius: 4px;
+  z-index: 0;
+}
+
+/* ─── Favorites ──────────────────────────────────────────────────────────── */
+
+/* The favorite card itself is fully clickable (opens the detail view) */
+.favorite-card {
+  cursor: pointer;
+}
+
+/* Circular red ✕ button overlaid on the top-right of the card image.
+   Hidden by default — only fades in when the user hovers the card (or focuses
+   the button via keyboard). */
+.favorite-remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.favorite-card:hover .favorite-remove-btn,
+.favorite-card:focus-within .favorite-remove-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.favorite-remove-btn:hover,
+.favorite-remove-btn:focus {
+  background-color: #c82333;
+  transform: scale(1.05);
+  outline: none;
+}
+
+.favorite-remove-btn i {
+  pointer-events: none; /* let clicks bubble to the button */
+}
+
+/* ─── Empty States ───────────────────────────────────────────────────────── */
+
+.favorites-heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.empty-state-text {
+  /* Scales smoothly between viewports — about 0.95rem on a 390px iPhone
+     (so the favorites empty-state copy wraps to 2 lines instead of 3),
+     and grows up to 1.25rem on wider screens. No media query needed.
+     No max-width: on desktop the text gets the full container width and
+     stays on a single line; on a narrow phone it wraps naturally. */
+  font-size: clamp(0.95rem, 2.4vw, 1.25rem);
+  color: #6c757d;
+  margin: 0;
+}
