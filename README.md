@@ -293,8 +293,12 @@ artsphere/
 │
 └── screenshots/
     ├── search.png
-    ├── results.png
-    ├── artwork-details.png
+    ├── results1.png
+    ├── results2.png
+    ├── results3.png
+    ├── artwork-details1.png
+    ├── artwork-details2.png
+    ├── artwork-details3.png
     ├── map.png
     └── favorites.png
 ```
@@ -398,11 +402,15 @@ The production Harvard API key is supplied through an environment variable rathe
 
 ### 🖼️ Search Results
 
-![ArtSphere Search Results](screenshots/results.png)
+![ArtSphere Search Results](screenshots/results1.png)
+![ArtSphere Search Results](screenshots/results2.png)
+![ArtSphere Search Results](screenshots/results3.png)
 
 ### 🎨 Artwork Details
 
-![ArtSphere Artwork Details](screenshots/artwork-details.png)
+![ArtSphere Artwork Details](screenshots/artwork-details1.png)
+![ArtSphere Artwork Details](screenshots/artwork-details2.png)
+![ArtSphere Artwork Details](screenshots/artwork-details3.png)
 
 ### 🗺️ Museum Location
 
